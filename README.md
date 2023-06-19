@@ -4,7 +4,7 @@ Right now it's a guide for creating a local debian repository with apt-mirror. W
 ------------
 In this case for no particular reason I'll create a local repo on fresh RedOS installation. This should apply to most RHEL based distributions such as CentOS.
 
-1. Get apt-mirror: `wget https://raw.githubusercontent.com/Stifler6996/apt-mirror/master/apt-mirror`
+1. Get [apt-mirror](https://github.com/Stifler6996/apt-mirror): `wget https://raw.githubusercontent.com/Stifler6996/apt-mirror/master/apt-mirror`
 2. Than you'll need to modify apt-mirror script to dowload files to prefered directory:
 
 ```
