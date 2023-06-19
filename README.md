@@ -1,11 +1,11 @@
-# local_repo_debian
+# Local debian repository
 Right now it's a guide for creating a local debian repository with apt-mirror. Will rewrite it in python some time later.
 
 ------------
 In this case for no particular reason I'll create a local repo on fresh RedOS installation. This should apply to most RHEL based distributions such as CentOS.
 
 1. Get [apt-mirror](https://github.com/Stifler6996/apt-mirror): `wget https://raw.githubusercontent.com/Stifler6996/apt-mirror/master/apt-mirror`
-2. Than you'll need to modify apt-mirror script to dowload files to prefered directory:
+2. Then you'll need to modify apt-mirror script to dowload files to prefered directory:
 
 ```
 sed -i 's|"base_path"   => '\''/var/spool/apt-mirror'\''|"base_path"   => '\''NEW PATH'\''|g' apt-mirror # replase NEW PATH with your prefered path
@@ -13,7 +13,7 @@ sed -i 's|config_file = "/etc/apt/mirror.list"|config_file = "config"|g' apt-mir
 sed -i 's/"run_postmirror"       => 1/"run_postmirror"       => 0/g' apt-mirror # remove post script run, we don't need it here.
 ```
 
-3. Install requiered perl packages: `sudo dnf install perl-File-Copy perl-File-Compare `
+3. Install required perl packages: `sudo dnf install perl-File-Copy perl-File-Compare `
 
 4. Create config file. For example you can use this command:
 
@@ -45,13 +45,12 @@ Downloading all this files will take some time, so I recommend passing it to ter
 
 ```
 sudo dnf install nginx
-sudo setenforce 0 # well need to disable selinux to be able to run nginx properly
+sudo setenforce 0 # we need to disable selinux to be able to run nginx properly
 ```
 
-Nginx config file should have something like this in it:
+Add the following to your nginx config file:
 
 `sudo vi /etc/nginx/nginx.conf`
-
 
 ```
 location / {
@@ -62,7 +61,7 @@ location / {
           }
 ```
 
-Modify /etc/apt/sources.list in your debian bases system \(replace ip with your repo machine\):
+Modify /etc/apt/sources.list in your debian bases system \("IP" should be replaced with the IP address of the server\):
 ```
 # Proxmox
 deb [arch=amd64] http://IP/download.proxmox.com/debian/pve/ buster pve-no-subscription
@@ -76,4 +75,4 @@ deb [arch=amd64] http://IP/deb.debian.org/debian/ bullseye-updates main contrib 
 
 Please **don't forget to run `apt-get update`** after this.
 
-And that's all, you done.
+And that's all, you're done.
